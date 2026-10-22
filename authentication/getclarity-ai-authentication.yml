@@ -1,0 +1,26 @@
+generated: '2026-10-22'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://clarityai.readme.io/reference/user_login_v1_token_post.md
+sources:
+- https://clarityai.readme.io/reference/user_login_v1_token_post.md
+- https://docs.getclarity.ai/reference/user_login_v1_token_post
+- https://clarityai.readme.io/reference/getting-started.md
+- https://docs.getclarity.ai/reference/getting-started
+description: Authentication methods for Clarity API
+schemes:
+- type: http-basic
+  name: basicAuth
+  evidence: Sending a GET request with basic authentication
+  location: header
+  header: Authorization
+  token_url: https://api.getclarity.ai/v1/users/token
+  how_to_obtain: Provide your CLARITY_API_USERNAME and CLARITY_API_PASSWORD as HTTP Basic credentials to the /users/token endpoint.
+- type: http-bearer
+  name: Bearer JWT
+  evidence: To utilize the access token, include an `Authorization` header in your request with the format `Bearer <ACCESS_TOKEN>`.
+  location: header
+  header: Authorization
+  how_to_obtain: First obtain a JWT access token via the /users/token endpoint, then include it as a Bearer token in the Authorization header
+    for all subsequent API calls.
+docs: https://clarityai.readme.io/reference/user_login_v1_token_post.md

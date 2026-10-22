@@ -1,0 +1,117 @@
+generated: '2026-10-22'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/getclarity-ai-clarity-api-openapi.yml
+vocabulary:
+  name: Clarity Domain Vocabulary
+  description: 'Terms declared by Clarity''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-22'
+  terms:
+  - term: UserAccessTokenResponse
+    definition: 'Object declared by the contract with fields: access_token, expires_in, token_type.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/UserAccessTokenResponse
+  - term: ApiRequestMeta
+    definition: 'Object declared by the contract with fields: scope, audience, project, request_id, es_index, approved, archived, notes.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/ApiRequestMeta
+  - term: AudioApiResult
+    definition: 'Object declared by the contract with fields: detector_name, alias, description, media_type, state, score, normalized_score, normalized_class,
+      signals.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/AudioApiResult
+  - term: AudioDetectorSignal
+    definition: 'Object declared by the contract with fields: timestamp_end, timestamp_start, score, normalized_score, normalized_class.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/AudioDetectorSignal
+  - term: AudioMetadata
+    definition: 'Object declared by the contract with fields: channels, sample_rate, duration, start_time.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/AudioMetadata
+  - term: BaseApiResult
+    definition: 'Object declared by the contract with fields: mcid, request_meta, state, details, created_at, updated_at, media, results.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/BaseApiResult
+  - term: BaseApiResultWithManInTheLoop
+    definition: Solves some "man in the loop" data excluding. Until we disable man in the loop
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/BaseApiResultWithManInTheLoop
+  - term: FeatureExtractorApiResult
+    definition: 'Object declared by the contract with fields: name, features.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/FeatureExtractorApiResult
+  - term: Media
+    definition: 'Object declared by the contract with fields: state, name, path, preview_path, type, metadata.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/Media
+  - term: MediaType
+    definition: An enumeration.
+    tags:
+    - Enumeration
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/MediaType
+  - term: Metadata
+    definition: 'Object declared by the contract with fields: name, raw_type, media_type, audio, video.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/Metadata
+  - term: MulticastResultRestAPI
+    definition: Solves some "man in the loop" data excluding. Until we disable man in the loop
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/MulticastResultRestAPI
+  - term: MulticastSearchResponse
+    definition: 'Object declared by the contract with fields: count, items, detail.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/MulticastSearchResponse
+  - term: RawType
+    definition: An enumeration.
+    tags:
+    - Enumeration
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/RawType
+  - term: StateType
+    definition: Enumeration of state types.
+    tags:
+    - Enumeration
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/StateType
+  - term: SynthesisResults
+    definition: 'Object declared by the contract with fields: state, score, normalized_score, normalized_class, confidence, detectors_weights.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/SynthesisResults
+  - term: VideoApiResult
+    definition: 'Object declared by the contract with fields: detector_name, alias, description, media_type, state, score, normalized_score, normalized_class,
+      signals.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/VideoApiResult
+  - term: VideoDetectorSignal
+    definition: 'Object declared by the contract with fields: timestamp, score, normalized_score, normalized_class.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/VideoDetectorSignal
+  - term: VideoMetadata
+    definition: 'Object declared by the contract with fields: duration, num_frames, fps, start_time.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/VideoMetadata
+  - term: HTTPValidationError
+    definition: 'Object declared by the contract with fields: detail.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/HTTPValidationError
+  - term: ValidationError
+    definition: 'Object declared by the contract with fields: loc, msg, type.'
+    tags:
+    - Object
+    source: openapi/getclarity-ai-clarity-api-openapi.yml#/components/schemas/ValidationError

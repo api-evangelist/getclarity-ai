@@ -1,0 +1,10 @@
+# Clarity Media Integrity API Documentation
+
+> Documentation for Clarity Media Integrity API
+
+## API Reference: Clarity API
+- [Getting Started](https://clarityai.readme.io/reference/getting-started.md): This page will help you get started with Clarity API
+- [Authentication](https://clarityai.readme.io/reference/user_login_v1_token_post.md): This page describes how to authenticate with the API
+- [Upload Media](https://clarityai.readme.io/reference/post_media-statement.md): Learn how to upload media for analysis
+- [Fetch Statements](https://clarityai.readme.io/reference/search_multicasts_v1_rest_get.md): Returns all statements
+- [Fetch one statement](https://clarityai.readme.io/reference/get_multicast_result_v1_rest__mcid__get.md): Fetch specific statement by MCID

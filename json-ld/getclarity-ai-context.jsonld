@@ -1,0 +1,250 @@
+{
+  "@context": {
+    "@vocab": "https://getclarity.ai/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "getclarity": "https://getclarity.ai/schema#",
+    "UserAccessTokenResponse": "getclarity:UserAccessTokenResponse",
+    "access_token": {
+      "@id": "getclarity:access_token",
+      "@type": "xsd:string"
+    },
+    "expires_in": {
+      "@id": "getclarity:expires_in",
+      "@type": "xsd:integer"
+    },
+    "token_type": {
+      "@id": "getclarity:token_type",
+      "@type": "xsd:string"
+    },
+    "ApiRequestMeta": "getclarity:ApiRequestMeta",
+    "scope": {
+      "@id": "getclarity:scope",
+      "@type": "xsd:string"
+    },
+    "audience": {
+      "@id": "getclarity:audience",
+      "@type": "xsd:string"
+    },
+    "project": {
+      "@id": "getclarity:project",
+      "@type": "xsd:string"
+    },
+    "request_id": {
+      "@id": "getclarity:request_id",
+      "@type": "xsd:string"
+    },
+    "es_index": {
+      "@id": "getclarity:es_index",
+      "@type": "xsd:string"
+    },
+    "approved": {
+      "@id": "getclarity:approved",
+      "@type": "xsd:boolean"
+    },
+    "archived": {
+      "@id": "getclarity:archived",
+      "@type": "xsd:boolean"
+    },
+    "notes": {
+      "@id": "getclarity:notes",
+      "@type": "xsd:string"
+    },
+    "AudioApiResult": "getclarity:AudioApiResult",
+    "detector_name": {
+      "@id": "getclarity:detector_name",
+      "@type": "xsd:string"
+    },
+    "alias": {
+      "@id": "getclarity:alias",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "getclarity:description",
+      "@type": "xsd:string"
+    },
+    "media_type": {
+      "@id": "getclarity:media_type",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "getclarity:state",
+      "@type": "@id"
+    },
+    "score": {
+      "@id": "getclarity:score",
+      "@type": "xsd:decimal"
+    },
+    "normalized_score": {
+      "@id": "getclarity:normalized_score",
+      "@type": "xsd:decimal"
+    },
+    "normalized_class": {
+      "@id": "getclarity:normalized_class",
+      "@type": "xsd:integer"
+    },
+    "signals": {
+      "@id": "getclarity:signals",
+      "@container": "@list"
+    },
+    "AudioDetectorSignal": "getclarity:AudioDetectorSignal",
+    "timestamp_end": {
+      "@id": "getclarity:timestamp_end",
+      "@type": "xsd:decimal"
+    },
+    "timestamp_start": {
+      "@id": "getclarity:timestamp_start",
+      "@type": "xsd:decimal"
+    },
+    "AudioMetadata": "getclarity:AudioMetadata",
+    "channels": {
+      "@id": "getclarity:channels",
+      "@type": "xsd:integer"
+    },
+    "sample_rate": {
+      "@id": "getclarity:sample_rate",
+      "@type": "xsd:integer"
+    },
+    "duration": {
+      "@id": "getclarity:duration",
+      "@type": "xsd:decimal"
+    },
+    "start_time": {
+      "@id": "getclarity:start_time",
+      "@type": "xsd:integer"
+    },
+    "BaseApiResult": "getclarity:BaseApiResult",
+    "mcid": {
+      "@id": "getclarity:mcid",
+      "@type": "xsd:string"
+    },
+    "request_meta": {
+      "@id": "getclarity:request_meta",
+      "@type": "@id"
+    },
+    "details": {
+      "@id": "getclarity:details",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "getclarity:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "getclarity:updated_at",
+      "@type": "xsd:dateTime"
+    },
+    "media": {
+      "@id": "getclarity:media",
+      "@type": "@id"
+    },
+    "results": {
+      "@id": "getclarity:results",
+      "@type": "@id"
+    },
+    "BaseApiResultWithManInTheLoop": "getclarity:BaseApiResultWithManInTheLoop",
+    "FeatureExtractorApiResult": "getclarity:FeatureExtractorApiResult",
+    "name": {
+      "@id": "getclarity:name",
+      "@type": "xsd:string"
+    },
+    "features": {
+      "@id": "getclarity:features"
+    },
+    "Media": "getclarity:Media",
+    "path": {
+      "@id": "getclarity:path",
+      "@type": "xsd:string"
+    },
+    "preview_path": {
+      "@id": "getclarity:preview_path",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "getclarity:type",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "getclarity:metadata",
+      "@type": "@id"
+    },
+    "MediaType": "getclarity:MediaType",
+    "Metadata": "getclarity:Metadata",
+    "raw_type": {
+      "@id": "getclarity:raw_type",
+      "@type": "@id"
+    },
+    "audio": {
+      "@id": "getclarity:audio",
+      "@type": "@id"
+    },
+    "video": {
+      "@id": "getclarity:video",
+      "@type": "@id"
+    },
+    "MulticastResultRestAPI": "getclarity:MulticastResultRestAPI",
+    "detectors": {
+      "@id": "getclarity:detectors",
+      "@container": "@list"
+    },
+    "feature_extractors": {
+      "@id": "getclarity:feature_extractors",
+      "@container": "@list"
+    },
+    "MulticastSearchResponse": "getclarity:MulticastSearchResponse",
+    "count": {
+      "@id": "getclarity:count",
+      "@type": "xsd:integer"
+    },
+    "items": {
+      "@id": "getclarity:items",
+      "@container": "@list"
+    },
+    "detail": {
+      "@id": "getclarity:detail"
+    },
+    "RawType": "getclarity:RawType",
+    "StateType": "getclarity:StateType",
+    "SynthesisResults": "getclarity:SynthesisResults",
+    "confidence": {
+      "@id": "getclarity:confidence",
+      "@type": "xsd:decimal"
+    },
+    "detectors_weights": {
+      "@id": "getclarity:detectors_weights"
+    },
+    "VideoApiResult": "getclarity:VideoApiResult",
+    "VideoDetectorSignal": "getclarity:VideoDetectorSignal",
+    "timestamp": {
+      "@id": "getclarity:timestamp",
+      "@type": "xsd:decimal"
+    },
+    "VideoMetadata": "getclarity:VideoMetadata",
+    "num_frames": {
+      "@id": "getclarity:num_frames",
+      "@type": "xsd:integer"
+    },
+    "fps": {
+      "@id": "getclarity:fps",
+      "@type": "xsd:decimal"
+    },
+    "HTTPValidationError": "getclarity:HTTPValidationError",
+    "ValidationError": "getclarity:ValidationError",
+    "loc": {
+      "@id": "getclarity:loc",
+      "@container": "@list"
+    },
+    "msg": {
+      "@id": "getclarity:msg",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Clarity API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Clarity's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-22) from openapi/getclarity-ai-clarity-api-openapi.yml.",
+  "dcterms:created": "2026-10-22",
+  "dcterms:source": [
+    "openapi/getclarity-ai-clarity-api-openapi.yml"
+  ]
+}

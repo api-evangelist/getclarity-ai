@@ -1,0 +1,617 @@
+openapi: 3.2.0
+info:
+  title: Clarity Media Statement API
+  version: 0.1.0
+servers:
+- url: https://api.getclarity.ai/{version}
+  variables:
+    version:
+      default: v1
+      description: API Version
+tags:
+- name: Media Statement
+paths:
+  /media-statement:
+    post:
+      summary: Upload Media
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                media_obj:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MulticastSearchResponse'
+      security:
+      - bearerAuth: []
+      tags:
+      - Media Statement
+      operationId: postMediaStatement
+      x-operation-id-source: derived
+    get:
+      summary: Fetch media statemetns
+      description: 'Handle a search request for statements objects.
+
+        search is handled by predefined accepted fields defined in MulticastSearchRequest
+
+        x_clarity_user is the header that translated by the prism proxy after authorization
+
+
+        return - MulticastSearchResponse scheme..'
+      operationId: search_multicasts_v1_rest_get
+      parameters:
+      - required: false
+        schema:
+          type: integer
+          title: Limit
+          default: 30
+        name: limit
+        in: query
+      - required: false
+        schema:
+          type: integer
+          title: Offset
+          default: 0
+        name: offset
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MulticastSearchResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - bearerAuth: []
+      tags:
+      - Media Statement
+  /media-statement/{mcid}:
+    get:
+      summary: Get Multicast Result
+      description: 'Handle a result request for statements objects.
+
+
+        return - full MulticastResult scheme.'
+      operationId: get_multicast_result_v1_rest__mcid__get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Mcid
+        name: mcid
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MulticastResultRestAPI'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - bearerAuth: []
+      tags:
+      - Media Statement
+components:
+  schemas:
+    Media:
+      properties:
+        state:
+          $ref: '#/components/schemas/StateType'
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+        preview_path:
+          type: string
+          title: Preview Path
+        type:
+          type: string
+          title: Type
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      type: object
+      required:
+      - state
+      title: Media
+    RawType:
+      type: string
+      enum:
+      - bytes
+      - uri
+      title: RawType
+      description: An enumeration.
+    BaseApiResultWithManInTheLoop:
+      properties:
+        mcid:
+          type: string
+          title: Mcid
+        request_meta:
+          $ref: '#/components/schemas/ApiRequestMeta'
+        state:
+          type: string
+          title: State
+        details:
+          type: string
+          title: Details
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        media:
+          $ref: '#/components/schemas/Media'
+        results:
+          $ref: '#/components/schemas/SynthesisResults'
+      type: object
+      required:
+      - mcid
+      - request_meta
+      - state
+      - details
+      - created_at
+      - updated_at
+      title: BaseApiResultWithManInTheLoop
+      description: 'Solves some "man in the loop" data excluding.
+
+        Until we disable man in the loop'
+    MediaType:
+      type: string
+      enum:
+      - video
+      - audio
+      title: MediaType
+      description: An enumeration.
+    VideoMetadata:
+      properties:
+        duration:
+          type: number
+          title: Duration
+        num_frames:
+          type: integer
+          title: Num Frames
+        fps:
+          type: number
+          title: Fps
+        start_time:
+          type: integer
+          title: Start Time
+      type: object
+      required:
+      - duration
+      - num_frames
+      - fps
+      - start_time
+      title: VideoMetadata
+    AudioApiResult:
+      properties:
+        detector_name:
+          type: string
+          title: Detector Name
+        alias:
+          type: string
+          title: Alias
+        description:
+          type: string
+          title: Description
+        media_type:
+          type: string
+          enum:
+          - audio
+          title: Media Type
+        state:
+          $ref: '#/components/schemas/StateType'
+        score:
+          type: number
+          title: Score
+        normalized_score:
+          type: number
+          title: Normalized Score
+        normalized_class:
+          type: integer
+          title: Normalized Class
+        signals:
+          items:
+            $ref: '#/components/schemas/AudioDetectorSignal'
+          type: array
+          title: Signals
+          default: []
+      type: object
+      required:
+      - detector_name
+      - alias
+      - description
+      - media_type
+      - state
+      title: AudioApiResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MulticastSearchResponse:
+      properties:
+        count:
+          type: integer
+          title: Count
+        items:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/BaseApiResult'
+            - $ref: '#/components/schemas/BaseApiResultWithManInTheLoop'
+            - $ref: '#/components/schemas/MulticastResultRestAPI'
+          type: array
+          title: Items
+          default: []
+        detail:
+          type: object
+          title: Detail
+          default: {}
+      type: object
+      required:
+      - count
+      title: MulticastSearchResponse
+    BaseApiResult:
+      properties:
+        mcid:
+          type: string
+          title: Mcid
+        request_meta:
+          $ref: '#/components/schemas/ApiRequestMeta'
+        state:
+          type: string
+          title: State
+        details:
+          type: string
+          title: Details
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        media:
+          $ref: '#/components/schemas/Media'
+        results:
+          $ref: '#/components/schemas/SynthesisResults'
+      type: object
+      required:
+      - mcid
+      - request_meta
+      - state
+      - details
+      - created_at
+      - updated_at
+      title: BaseApiResult
+    AudioMetadata:
+      properties:
+        channels:
+          type: integer
+          title: Channels
+        sample_rate:
+          type: integer
+          title: Sample Rate
+        duration:
+          type: number
+          title: Duration
+        start_time:
+          type: integer
+          title: Start Time
+      type: object
+      required:
+      - channels
+      - sample_rate
+      - duration
+      - start_time
+      title: AudioMetadata
+    StateType:
+      type: string
+      enum:
+      - SCHEDULED
+      - PENDING
+      - RUNNING
+      - COMPLETED
+      - FAILED
+      - CANCELLED
+      - CRASHED
+      - PAUSED
+      - CANCELLING
+      title: StateType
+      description: Enumeration of state types.
+    FeatureExtractorApiResult:
+      properties:
+        name:
+          type: string
+          title: Name
+        features:
+          title: Features
+      type: object
+      required:
+      - name
+      title: FeatureExtractorApiResult
+    MulticastResultRestAPI:
+      properties:
+        mcid:
+          type: string
+          title: Mcid
+        request_meta:
+          $ref: '#/components/schemas/ApiRequestMeta'
+        state:
+          type: string
+          title: State
+        details:
+          type: string
+          title: Details
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        media:
+          $ref: '#/components/schemas/Media'
+        results:
+          $ref: '#/components/schemas/SynthesisResults'
+        detectors:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/VideoApiResult'
+            - $ref: '#/components/schemas/AudioApiResult'
+          type: array
+          title: Detectors
+          default: []
+        feature_extractors:
+          items:
+            $ref: '#/components/schemas/FeatureExtractorApiResult'
+          type: array
+          title: Feature Extractors
+          default: []
+      type: object
+      required:
+      - mcid
+      - state
+      - created_at
+      - updated_at
+      title: MulticastResultRestAPI
+      description: 'Solves some "man in the loop" data excluding.
+
+        Until we disable man in the loop'
+    VideoDetectorSignal:
+      properties:
+        timestamp:
+          type: number
+          title: Timestamp
+        score:
+          type: number
+          title: Score
+        normalized_score:
+          type: number
+          title: Normalized Score
+        normalized_class:
+          type: integer
+          title: Normalized Class
+      type: object
+      required:
+      - score
+      title: VideoDetectorSignal
+    Metadata:
+      properties:
+        name:
+          type: string
+          title: Name
+        raw_type:
+          $ref: '#/components/schemas/RawType'
+        media_type:
+          $ref: '#/components/schemas/MediaType'
+        audio:
+          $ref: '#/components/schemas/AudioMetadata'
+        video:
+          $ref: '#/components/schemas/VideoMetadata'
+      type: object
+      required:
+      - name
+      - raw_type
+      - media_type
+      title: Metadata
+    VideoApiResult:
+      properties:
+        detector_name:
+          type: string
+          title: Detector Name
+        alias:
+          type: string
+          title: Alias
+        description:
+          type: string
+          title: Description
+        media_type:
+          type: string
+          enum:
+          - video
+          title: Media Type
+        state:
+          $ref: '#/components/schemas/StateType'
+        score:
+          type: number
+          title: Score
+        normalized_score:
+          type: number
+          title: Normalized Score
+        normalized_class:
+          type: integer
+          title: Normalized Class
+        signals:
+          items:
+            $ref: '#/components/schemas/VideoDetectorSignal'
+          type: array
+          title: Signals
+          default: []
+      type: object
+      required:
+      - detector_name
+      - alias
+      - description
+      - media_type
+      - state
+      title: VideoApiResult
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ApiRequestMeta:
+      properties:
+        scope:
+          type: string
+          title: Scope
+        audience:
+          type: string
+          title: Audience
+        project:
+          type: string
+          title: Project
+        request_id:
+          type: string
+          title: Request Id
+        es_index:
+          type: string
+          title: Es Index
+        approved:
+          type: boolean
+          title: Approved
+          default: false
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        notes:
+          type: string
+          title: Notes
+          default: ''
+      type: object
+      required:
+      - scope
+      - audience
+      - project
+      - request_id
+      - es_index
+      title: ApiRequestMeta
+    SynthesisResults:
+      properties:
+        state:
+          $ref: '#/components/schemas/StateType'
+        score:
+          type: number
+          title: Score
+        normalized_score:
+          type: number
+          title: Normalized Score
+        normalized_class:
+          type: integer
+          title: Normalized Class
+        confidence:
+          type: number
+          title: Confidence
+        detectors_weights:
+          additionalProperties:
+            type: number
+          type: object
+          title: Detectors Weights
+      type: object
+      required:
+      - state
+      title: SynthesisResults
+    AudioDetectorSignal:
+      properties:
+        timestamp_end:
+          type: number
+          title: Timestamp End
+        timestamp_start:
+          type: number
+          title: Timestamp Start
+        score:
+          type: number
+          title: Score
+        normalized_score:
+          type: number
+          title: Normalized Score
+        normalized_class:
+          type: integer
+          title: Normalized Class
+      type: object
+      required:
+      - score
+      title: AudioDetectorSignal
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-provenance:
+  method: searched
+  source: https://docs.getclarity.ai/reference
+  harvested: '2026-10-21'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.getclarity.ai/reference/get_multicast_result_v1_rest__mcid__get.md
+  - https://docs.getclarity.ai/reference/post_media-statement.md
+  - https://docs.getclarity.ai/reference/search_multicasts_v1_rest_get.md
+  - https://docs.getclarity.ai/reference/user_login_v1_token_post.md
+  merge:
+    pages: 4
+    deduped: 37
+    conflicts_kept_first: 0

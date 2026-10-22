@@ -1,25 +1,97 @@
 aid: getclarity-ai
+
 name: Clarity
-description: 'Clarity is a company surfaced via the API Evangelist harvest backlog (source: vc-portfolio;
-  backed by bessemer-venture-partners) and added to the network as a stub for full-pipeline profiling.'
+
+image: https://cdn.prod.website-files.com/675ab8df2b03654f8aad5a6e/6882258cd8c20471cdbe7745_OpenGraph-home.jpg
+
+description: 'Clarity provides an end‑to‑end platform that protects organizations’ hiring and onboarding processes from fraud. The solution combines application verification, AI deepfake detection, identity confirmation and proxy‑identity detection to secure candidates and employees throughout the talent acquisition lifecycle. It is sold to companies that need to verify the authenticity of hires and prevent hiring fraud.'
+
 url: https://raw.githubusercontent.com/api-evangelist/getclarity-ai/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:vc-portfolio
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-22 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-21'
+
 modified: '2026-10-21'
+
 tags:
-- Company
-apis: []
+- Hiring fraud
+- Identity verification
+- Deepfake detection
+- Talent acquisition security
+- AI hiring security
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
-x-backed-by:
-- bessemer-venture-partners
+
 common:
+- type: AgenticAccess
+  url: agentic-access/getclarity-ai-agentic-access.yml
+- type: Spectral
+  url: rules/getclarity-ai-rules.yml
+- type: JSONLD
+  url: json-ld/getclarity-ai-context.jsonld
+- type: Vocabulary
+  url: vocabulary/getclarity-ai-vocabulary.yml
+- type: DataModel
+  url: data-model/getclarity-ai-data-model.yml
+- type: Authentication
+  url: authentication/getclarity-ai-authentication.yml
+- type: ErrorCatalog
+  url: errors/getclarity-ai-problem-types.yml
+- type: Conformance
+  url: conformance/getclarity-ai-conformance.yml
+- type: LLMsTxt
+  url: llms/getclarity-ai-llms.txt
+- type: Hosts
+  url: hosts/getclarity-ai-hosts.yml
+- type: Vendors
+  url: vendors/getclarity-ai-vendors.yml
+- type: TrustCenter
+  url: https://trust.getclarity.ai/
+- type: APIReference
+  url: https://docs.getclarity.ai/reference
+- type: GettingStarted
+  url: https://clarityai.readme.io/reference/getting-started
+- type: Documentation
+  url: https://apidocs.getclarity.ai/
+- type: DomainSecurity
+  url: security/getclarity-ai-domain-security.yml
 - type: Website
   url: https://www.getclarity.ai/
+
+apis:
+- aid: getclarity-ai:getclarity-ai-media-statement-api
+  name: Clarity Media Statement API
+  description: The Media Statement API from Clarity — 2 operation(s) for media statement.
+  tags:
+  - Media Statement
+  properties:
+  - type: OpenAPI
+    url: openapi/getclarity-ai-media-statement-api-openapi.yml
+- aid: getclarity-ai:getclarity-ai-users-api
+  name: Clarity Users API
+  description: The Users API from Clarity — 1 operation(s) for users.
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/getclarity-ai-users-api-openapi.yml
+x-backed-by:
+- bessemer-venture-partners
+x-enrichment:
+  date: '2026-10-22'
+  status: enriched
+  artifacts_added: 19
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

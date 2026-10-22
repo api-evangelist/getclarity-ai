@@ -1,0 +1,71 @@
+openapi: 3.2.0
+info:
+  title: Clarity Users API
+  version: 0.1.0
+servers:
+- url: https://api.getclarity.ai/{version}
+  variables:
+    version:
+      default: v1
+      description: API Version
+tags:
+- name: Users
+paths:
+  /users/token:
+    post:
+      summary: User Login
+      description: Generates JWT.
+      operationId: user_login_v1_token_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAccessTokenResponse'
+      security:
+      - basicAuth: []
+      tags:
+      - Users
+components:
+  schemas:
+    UserAccessTokenResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        expires_in:
+          type: integer
+          title: Expires In
+        token_type:
+          type: string
+          title: Token Type
+      type: object
+      required:
+      - access_token
+      - expires_in
+      - token_type
+      title: UserAccessTokenResponse
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-provenance:
+  method: searched
+  source: https://docs.getclarity.ai/reference
+  harvested: '2026-10-21'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.getclarity.ai/reference/get_multicast_result_v1_rest__mcid__get.md
+  - https://docs.getclarity.ai/reference/post_media-statement.md
+  - https://docs.getclarity.ai/reference/search_multicasts_v1_rest_get.md
+  - https://docs.getclarity.ai/reference/user_login_v1_token_post.md
+  merge:
+    pages: 4
+    deduped: 37
+    conflicts_kept_first: 0
